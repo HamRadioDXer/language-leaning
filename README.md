@@ -249,6 +249,7 @@ Type *pointer = new Type[N];
 //...
 delete[] pointer;
   ```
+<<<<<<< HEAD
   
 
   **new** 与 **malloc**的区别
@@ -268,3 +269,6 @@ delete[] pointer;
    * 命名空间相互嵌套
    * 全局作用域也叫默认命名空间
  * 
+=======
+  
+>>>>>>> e64b9330010ec912a69e79ecdc4192044c711113

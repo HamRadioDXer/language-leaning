@@ -234,9 +234,11 @@ C++ 编译器不能以C的方式编译重载函数
 
 ### C++ 中新成员
 #### 动态内存分配
-    * C++ 通过 **new**关键字进行动态内存 **申请**
-    * 是基于类型进行的e
-    * **delete**关键字进行内存的释放
+
+  *   C++ 通过 **new**关键字进行动态内存 **申请**
+ *  是基于类型进行的e
+*  delete**关键字进行内存的释放
+
   ```c
   Type *pointer = new Type;
   //...
@@ -272,6 +274,7 @@ delete[] pointer;
    * 将 **全局作用域分成不同部分**
    * 不同命名空间中的标识符可以同名而不会发生冲突
    * 命名空间相互嵌套
+<<<<<<< HEAD
    * 全局作用域也叫默认命名空间
   
 
@@ -336,10 +339,287 @@ int main()
 * C++中通过定义访问级别实现封装机制
 * public成员在类的内部和外部可访问和调用
 * private成员只能在内部访问调用
+*   全局作用域也叫默认命名空间
+
+#### 类的真正形态
+  * 如果没有声明访问权限，默认是private
+  * struct默认是public
+  * 类的实现和应用的区别
+
+
+```c
+#include "Operator.h"
+
+bool Operator::setOperator(char op)
+{
+    bool ret = false;
+        
+    if( (op == '+') || (op == '-') || (op == '*') || (op == '/') )
+    {
+        ret = true;
+        mOp = op;
+    }
+    else
+    {
+        mOp = '\0';
+    }
+        
+    return ret;
+}
+
+void Operator::setParameter(double p1, double p2)
+{
+    mP1 = p1;
+    mP2 = p2;
+}
+    
+bool Operator::result(double& r) //bool返回计算是否成功
+{
+    bool ret = true;
+        
+    switch( mOp )
+    {
+        case '/':
+            if( (-0.000000001 < mP2) && (mP2 < 0.000000001) )
+            {
+                ret = false;
+            }
+            else
+            {
+                r = mP1 / mP2;
+            }
+            break;
+        case '+':
+            r = mP1 + mP2;
+            break;
+        case '*':
+            r = mP1 * mP2;
+            break;
+        case '-':
+            r = mP1 - mP2;
+            break;
+        default:
+            ret = false;
+            break;
+    }
+        
+    return ret;
+}
+
+```C++
+#include <stdio.h>
+
+class Test
+{
+private:
+    int i;
+    int j;
+public:
+    int getI() { return i; }
+    int getJ() { return j; }
+};
+
+Test gt; //全局变量默认初始化为0
+
+int main()
+{
+    printf("gt.i = %d\n", gt.getI()); //输出为0
+    printf("gt.j = %d\n", gt.getJ());
+    
+      Test t1;
+    
+    printf("t1.i = %d\n", t1.getI());//局部输出为乱码
+    printf("t1.j = %d\n", t1.getJ());
+    
+    Test* pt = new Test;//类也是一个变量类型，指向一个指针也是可以的
+    printf("pt->i = %d\n", pt->getI());
+  //指针访问类的成员函数的形式“p->成员函数”
+    printf("pt->i = %d\n", pt->getI());
+    printf("pt->j = %d\n", pt->getJ());
+    
+    delete pt;
+    
+    return 0;
+}
 
 
 
 
 
+```
+
+> 如何做到一个变量不管是在哪里定义的他的初始值都是确定的呢？
+
+* 程序设计角度，对象也只是变量
+  * 在栈上创建的初始值是随机的
+  * 在堆上创建的也是随机值 
+  * 在 **静态存储区**创建的成员初始值是 **0**值
+
+C++中与函数名字相同的函数，这个特殊的成员函数叫做 **构造函数**
+   * 没有任何返回类型的说明
+   * 与函数值同名
+   * 构造函数在定义时被自动调用
+   * 构造函数可以根据需要定义参数
+   * 一个函数中可以存在 **多个重载的构造函数**
+   * 构造函数重载遵循C++的重载规则
+   ```C++
+   class Test
+   {
+     public :
+       Test(int v)
+       //v作为成员变量
+       //可以定义多个构造函数，用参数的不同区分开
 
 
+
+   }
+
+
+   ```
+###### 定义和声明的不同
+
+* 定义对象--申请空间并调用构造函数
+  
+  * Test t； 
+* 对象声明---告诉编译器存在这么一个对象
+  ```C++
+  int main {
+    extern Test t； 
+  }
+  return 0；
+  ```
+
+
+
+>释放堆空间（delete pt）
+
+赋值和初始化不同
+
+
+
+###### 手动调用构造函数
+```c++
+#include <stdio.h>
+
+class Test
+{
+private:
+    int m_value;
+public:
+    Test() 
+    { 
+        printf("Test()\n");
+        
+        m_value = 0;
+    }
+    Test(int v) 
+    { 
+        printf("Test(int v), v = %d\n", v);
+        
+        m_value = v;
+    }
+    int getValue()
+    {
+        return m_value;
+    }
+};
+
+int main()
+{
+    Test ta[3] = {Test(), Test(1), Test(2)};      
+    
+    for(int i=0; i<3; i++)
+    {
+        printf("ta[%d].getValue() = %d\n", i , ta[i].getValue());
+    }
+    
+    Test t = Test(100);//c++的灵活性
+    
+    printf("t.getValue() = %d\n", t.getValue());
+    
+    return 0;
+}
+
+
+```
+
+#### 无参构造函数
+
+#### 拷贝构造函数
+**const class_name&**
+
+
+默认拷贝构造函数
+
+浅拷贝：拷贝后物理状态相同
+
+深拷贝：拷贝后逻辑状态相同
+
+**编译器提供的拷贝只进行浅拷贝**
+```c++
+
+#include <stdio.h>
+
+class Test
+{
+private:
+    int i;
+    int j;
+    int* p;
+public:
+    int getI()
+    {
+        return i;
+    }
+    int getJ()
+    {
+        return j;
+    }
+    int* getP()
+    {
+        return p;
+    }
+    Test(const Test& t) //深拷贝
+    {
+        i = t.i;
+        j = t.j;
+        p = new int;//指针P用来指向一个动态的内存，新空间空间
+        
+        *p = *t.p;//地址当中的值进行重新的指定
+        //t对象里面的值给拿出来，指向p所指的堆空间
+    }
+    Test(int v)
+    {
+        i = 1;
+        j = 2;
+        p = new int;
+        
+        *p = v; //再将内存空间的内容赋值为传入的v
+    }
+    void free()
+    {
+        delete p;
+    }
+};
+
+int main()
+{
+    Test t1(3);
+    Test t2(t1);
+    
+    printf("t1.i = %d, t1.j = %d, *t1.p = %d\n", t1.getI(), t1.getJ(), *t1.getP());
+    printf("t2.i = %d, t2.j = %d, *t2.p = %d\n", t2.getI(), t2.getJ(), *t2.getP());
+    
+    t1.free();
+    t2.free();
+    
+    return 0;
+}
+
+```
+
+* 有了构造函数就不再去调用默认构造函数，如果对象建立时不用自定义的构造函数格式那么会编译通不过
+* 什么时候需要深拷贝
+* 成员打开了动态内存空间
+* 成员打开了外存中的文件
+* 成员使用了系统中的网络端口

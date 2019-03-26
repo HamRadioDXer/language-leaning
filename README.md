@@ -249,6 +249,7 @@ Type *pointer = new Type[N];
 //...
 delete[] pointer;
   ```
+
   
 
   **new** 与 **malloc**的区别
@@ -272,5 +273,3 @@ delete[] pointer;
    * 不同命名空间中的标识符可以同名而不会发生冲突
    * 命名空间相互嵌套
    * 全局作用域也叫默认命名空间
- * 
- * 

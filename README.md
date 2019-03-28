@@ -628,3 +628,129 @@ int main()
 
  * 全局作用域也叫默认命名空间
 
+#### 自定义的拷贝构造函数，**必然要实现深拷贝**
+
+```C++
+#include "IntArray.h"
+
+IntArray::IntArray(int len)
+{
+    m_pointer = new int[len];//定义一个数组类
+    
+    for(int i=0; i<len; i++)
+    {
+        m_pointer[i] = 0;//挨个赋值
+    }
+    
+    m_length = len;
+}
+//数组类深层拷贝函数
+IntArray::IntArray(const IntArray& obj)
+{
+    m_length = obj.m_length; //m_length是上面的构造函数变量，赋给当前函数
+    
+    m_pointer = new int[obj.m_length];//申请一块新的内存指针。。。。不懂，，，，这样只是一个数字而已没有什么意义，为了告诉下面有几个循环。。。。。实际工作是产生三个新的动态内存指针哈哈
+    
+    for(int i=0; i<obj.m_length; i++)
+    {
+        m_pointer[i] = obj.m_pointer[i];
+    }
+}
+
+int IntArray::length()
+{
+    return m_length;
+}
+
+bool IntArray::get(int index, int& value)
+{
+    bool ret = (0 <= index) && (index < length());
+    
+    if( ret )
+    {
+        value = m_pointer[index];
+    }
+    
+    return ret;
+}
+
+bool IntArray::set(int index, int value)
+{
+    bool ret = (0 <= index) && (index < length());
+    
+    if( ret )
+    {
+        m_pointer[index] = value;
+    }
+    
+    return ret;
+}
+
+void IntArray::free()
+{
+    delete[]m_pointer;
+}
+
+```
+
+
+### 初始化列表的使用（C++引入）
+
+构造函数之后函数体之前
+```c++
+ClassName:ClaseName():
+            m1(v1),m2(v1,v2),m3(v1,v2,v3)
+{
+//v1对m1初始化，不意味着m1先比m2初始化
+}
+```
+
+* 成员的初始化顺序与成员的声明顺序相同；**依赖于成员的声明顺序**
+* 成员的初始化顺序与初始化列表中的位置无关
+* 初始化列表优先于函数先执行
+
+```c++
+#include <stdio.h>
+
+class Value
+{
+private:
+    int mi;
+public:
+    Value(int i)
+    {
+        printf("i = %d\n", i);
+        mi = i;
+    }
+    int getI()
+    {
+        return mi;
+    }
+};
+
+class Test
+{
+private:
+    Value m2; //类中的对象实现
+    Value m3;
+    Value m1;
+public:
+    Test() : m1(1), m2(2), m3(3)
+    {
+        printf("Test::Test()\n");
+    }
+};
+
+
+int main()
+{
+    Test t;
+    
+    return 0;
+}
+
+```
+
+* 类中的const成员只能在初始化列表中指定初始值
+* 编译器无法直接的到const成员的初始值 ，因此无法进入符号表成为真正的常量
+* 

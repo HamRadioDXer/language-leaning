@@ -804,6 +804,78 @@ int main()
 * 直接static关键字修饰
 * 使用上差异不大
 * 静态成员函数通过类名访问
-#### 二阶构造模式
+#### 二阶构造模式（开发中小小的方法）
+* 如何判断构造函数执行结果
+
+* 构造中用return 发生什么》》》立即返回
+
+* 执行结束是否代表构造成功？？？不意味着构造成功
+* 
+*
+*
+*
 
 * 
+
+
+
+```C++
+#include <stdio.h>
+
+class Test
+{
+    int mi;
+    int mj;
+    bool mStatus;
+public:
+    Test(int i, int j) : mStatus(false) //强行返回值
+    {
+        mi = i;
+        
+        return;
+        
+        mj = j;
+        
+        mStatus = true;
+    }
+    int getI()
+    {
+        return mi;
+    }
+    int getJ()
+    {
+        return mj;
+    }
+    int status()
+    {
+        return mStatus;
+    }
+};
+
+int main()
+{  
+    Test t1(1, 2);
+    
+    if( t1.status() )
+    {
+        printf("t1.mi = %d\n", t1.getI());
+        printf("t1.mj = %d\n", t1.getJ());
+    
+    }
+    
+    return 0;
+}
+```
+
+
+* 构造函数只是决定函数的初始状态，不能决定飞翔的创建
+* 半成品对象
+* 伪指针
+* 
+
+* 资源无关的初始化操作
+* 需要系统资源的操作（内存申请）
+
+![](Slide11.png)
+![](Slide12.png)
+

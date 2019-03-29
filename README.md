@@ -876,6 +876,6 @@ int main()
 * 资源无关的初始化操作
 * 需要系统资源的操作（内存申请）
 
-![](Slide11.png)
-![](Slide12.png)
+![](photo/Slide11.png)
+![](photo/Slide12.png)
 

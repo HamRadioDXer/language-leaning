@@ -2,7 +2,7 @@
 ##  C++ 学习
 
 
-### 唐老师
+
 #### 函数重载
 * 参数个数不同
 * 参数类型不同
@@ -495,7 +495,651 @@ C++中与函数名字相同的函数，这个特殊的成员函数叫做 **构�
 
 赋值和初始化不同
 
+##### 常规向量
+#### 直接引用元素
+方法：重载操作符[]
+```c++
+template <typename T> T& Vector<T>::operator[] (Rank r) const
+{ return _elem[r];}
+```
+#### 置乱器
+重载后的“[ ]”返回的是对数组元素的引用
+置乱器是软件测试中的常用方法；permute（）算法
+* 区间置乱器接口
+```C++
+template <typename T> void Vector<T>::unsort (Rank lo,Rank hi){
+    T* V = _elem + lo;
+    for (Rank i=hi-lo;i>0;i--)
+        swap(V[i-1],V[rand()%i]);
+}
+```
+##### 无序向量
+* 仅支持比对，但未必支持比较的向量，称作无序向量（unsorted vector）
+  ###### 顺序查找
+  从后向前依次查找
+  ```c++
+  template <typename T>//无序向量的顺序查找：返回最后一个元素e的位置，失败时返回lo-1
+  Rank Vector<T>::find (T const& e,Rank lo,Rank hi)const
+  {
+      while((lo < hi--) && (e!= _elem[hi] )) ; 
+      //从后向前搜索，记住这种代码风格，找到后立马返回，从而省略掉不必要的比对
+      return hi;
 
+  }
+ 
+  ```
+* 上面的顺序查找是为输入敏感型算法
+* C/C++的短路求值特性
+##### 插入
+* 实现 
+  ```C++
+    //insert(r,e)
+    template <template T >//将e作为元素，R为秩插入
+    Rank Vector<T>::insret (Rank r,T const& e){
+        expand();
+        for (int i = _size; i > r ; i -- )
+            _elem[i]=_elem[i-1]; //自后向前，后继元素顺次后移一个单元
+            _elem[r]=e;
+            _size++;//置入新元素并更新容量
+        return r;//返回秩，代表插入成功
+    }
+  ```
+* 后继元素的搬迁次序不能颠倒，负责会出现覆盖而造成数据都是
+* 时间复杂度O（_size - r+1）,平均运行时间O（_size）=O(n)
+  #### 删除
+  * 接口：remove（lo,li）删除[lo,li)区间的元素；remove(r):删除秩为r的单个元素
+区间删除：remove[lo,li]
+```c++
+    template <typename T> int Vector<T>::remove (Rank lo, Rank hi){
+        if (lo == li)return 0 ;//处理单退化情况
+        while(li < _size ) _elem[lo++]=_elem[hi++];
+        _size = lo;
+        shrink();
+       
+       
+        return hi - lo;
+
+    }
+
+
+```
+#### 唯一化
+实现
+```c++
+template <typename T > int Vector<T>::deduplicate(){
+    int oldSize = _size ; //记录数据规模
+    Rank i=1;
+    while(i<_size)
+        (find (_elem[i],0,1) < 0 )?
+        i++:remove(i);
+    return oldSize - size;
+    
+
+
+}
+
+```
+
+
+```c++
+//Node.h
+#ifndef NODE_H
+#define NODE_H
+//类模板的定义
+template <class T>
+class Node {
+private:
+    Node<T> *next;  //指向后继结点的指针
+public:
+    T data; //数据域
+    Node (const T &data, Node<T> *next = 0);    //构造函数
+    void insertAfter(Node<T> *p);   //在本结点之后插入一个同类结点p 
+    Node<T> *deleteAfter(); //删除本结点的后继结点，并返回其地址
+    Node<T> *nextNode();            //获取后继结点的地址
+    const Node<T> *nextNode() const;     //获取后继结点的地址
+};
+
+//类的实现部分
+//构造函数，初始化数据和指针成员
+template <class T>
+Node<T>::Node(const T& data, Node<T> *next = 0 ) : data(data), next(next) { }
+//返回后继结点的指针
+template <class T>
+Node<T> *Node<T>::nextNode() {
+    return next;
+}
+//返回后继结点的指针
+template <class T>
+const Node<T> *Node<T>::nextNode() const {
+    return next;
+} 
+//在当前结点之后插入一个结点p 
+template <class T>
+void Node<T>::insertAfter(Node<T> *p) {
+    p->next = next; //p结点指针域指向当前结点的后继结点
+    next = p;    //当前结点的指针域指向p 
+}
+//删除当前结点的后继结点，并返回其地址
+template <class T> Node<T> *Node<T>::deleteAfter() {
+    Node<T> *tempPtr = next;//将欲删除的结点地址存储到tempPtr中
+    if (next == 0)  //如果当前结点没有后继结点，则返回空指针
+        return 0;
+    next = tempPtr->next;//使当前结点的指针域指向tempPtr的后继结点
+    return tempPtr;         //返回被删除的结点的地址
+}
+#endif //NODE_H
+```
+#### 链表实例
+```c++
+
+//LinkedList.h
+#ifndef LINKEDLIST_H
+#define LINKEDLIST_H
+#include "Node.h"
+
+template <class T>
+class LinkedList {
+private:
+    //数据成员：
+    Node<T> *front, *rear;  //表头和表尾指针
+    Node<T> *prevPtr, *currPtr;   //记录表当前遍历位置的指针，由插入和删除操作更新
+    int size;   //表中的元素个数
+    int position;   //当前元素在表中的位置序号。由函数reset使用
+
+    //函数成员：
+    //生成新结点，数据域为item，指针域为ptrNext
+    Node<T> *newNode(const T &item,Node<T> *ptrNext=NULL);
+
+    //释放结点
+    void freeNode(Node<T> *p);
+
+    //将链表L 拷贝到当前表（假设当前表为空）。
+    //被拷贝构造函数、operator = 调用
+    void copy(const LinkedList<T>& L);
+
+public:
+    LinkedList();   //构造函数
+    LinkedList(const LinkedList<T> &L);  //拷贝构造函数
+    ~LinkedList();  //析构函数
+    LinkedList<T> & operator = (const LinkedList<T> &L); //重载赋值运算符
+
+    int getSize() const;    //返回链表中元素个数
+    bool isEmpty() const;   //链表是否为空
+
+    void reset(int pos = 0);//初始化游标的位置
+    void next();    //使游标移动到下一个结点
+    bool endOfList() const; //游标是否到了链尾
+    int currentPosition() const;    //返回游标当前的位置
+
+    void insertFront(const T &item);    //在表头插入结点
+    void insertRear(const T &item);     //在表尾添加结点
+    void insertAt(const T &item);       //在当前结点之前插入结点
+    void insertAfter(const T &item);    //在当前结点之后插入结点
+
+    T deleteFront();    //删除头结点
+    void deleteCurrent();   //删除当前结点
+
+    T& data();              //返回对当前结点成员数据的引用
+    const T& data() const;   //返回对当前结点成员数据的常引用
+
+    //清空链表：释放所有结点的内存空间。被析构函数、operator= 调用
+    void clear();
+};
+
+template <class T> //生成新结点
+Node<T> *LinkedList<T>::newNode(const T& item, Node<T>* ptrNext)
+{
+    Node<T> *p;
+    p = new Node<T>(item, ptrNext);
+    if (p == NULL)
+    {
+        cout << "Memory allocation failure!\n";
+        exit(1);
+    }
+    return p;
+}
+
+template <class T>
+void LinkedList<T>::freeNode(Node<T> *p) //释放结点
+{
+    delete p;
+}
+
+template <class T>
+void LinkedList<T>::copy(const LinkedList<T>& L) //链表复制函数
+{
+    Node<T> *p = L.front;   //P用来遍历L 
+    int pos;
+    while (p != NULL)   //将L中的每一个元素插入到当前链表最后
+    {
+        insertRear(p->data);
+        p = p->nextNode();
+    }
+    if (position == -1) //如果链表空,返回
+        return;
+    //在新链表中重新设置prevPtr和currPtr
+    prevPtr = NULL;
+    currPtr = front;
+    for (pos = 0; pos != position; pos++)
+    {
+        prevPtr = currPtr;
+        currPtr = currPtr->nextNode();
+    }
+}
+
+template <class T>  //构造一个新链表，将有关指针设置为空，size为0，position为-1
+LinkedList<T>::LinkedList() : front(NULL), rear(NULL),
+prevPtr(NULL), currPtr(NULL), size(0), position(-1)
+{}
+
+template <class T>
+LinkedList<T>::LinkedList(const LinkedList<T>& L)  //拷贝构造函数
+{
+    front = rear = NULL;
+    prevPtr = currPtr = NULL;
+    size = 0;
+    position = -1;
+    copy(L);
+}
+
+template <class T>
+LinkedList<T>::~LinkedList()    //析构函数
+{
+    clear();
+}
+
+template <class T>
+LinkedList<T>& LinkedList<T>::operator=(const LinkedList<T>& L)//重载"="
+{
+    if (this == &L) // 不能将链表赋值给它自身
+        return *this;
+    clear();
+    copy(L);
+    return *this;
+}
+
+template <class T>
+int LinkedList<T>::getSize() const  //返回链表大小的函数
+{
+    return size;
+}
+
+template <class T>
+bool LinkedList<T>::isEmpty() const //判断链表为空否
+{
+    return size == 0;
+}
+
+template <class T>
+void LinkedList<T>::reset(int pos)  //将链表当前位置设置为pos 
+{
+    int startPos;
+    if (front == NULL)  // 如果链表为空，返回
+        return;
+    if (pos < 0 || pos > size - 1)  // 如果指定位置不合法，中止程序
+    {
+        std::cerr << "Reset: Invalid list position: " << pos << endl;
+        return;
+    }
+    // 设置与遍历链表有关的成员
+    if (pos == 0)   // 如果pos为0，将指针重新设置到表头
+    {
+        prevPtr = NULL;
+        currPtr = front;
+        position = 0;
+    }
+    else    // 重新设置 currPtr, prevPtr, 和 position 
+    {
+        currPtr = front->nextNode();
+        prevPtr = front;
+        startPos = 1;
+        for (position = startPos; position != pos; position++)
+        {
+            prevPtr = currPtr;
+            currPtr = currPtr->nextNode();
+        }
+    }
+}
+
+template <class T>
+void LinkedList<T>::next()  //将prevPtr和currPtr向前移动一个结点
+{
+    if (currPtr != NULL)
+    {
+        prevPtr = currPtr;
+        currPtr = currPtr->nextNode();
+        position++;
+    }
+}
+
+template <class T>
+bool LinkedList<T>::endOfList() const   // 判断是否已达表尾
+{
+    return currPtr == NULL;
+}
+
+template <class T>
+int LinkedList<T>::currentPosition() const  // 返回当前结点的位置
+{
+    return position;
+}
+
+template <class T>
+void LinkedList<T>::insertFront(const T& item)   // 将item插入在表头
+{
+    if (front != NULL)  // 如果链表不空则调用Reset 
+        reset();
+    insertAt(item); // 在表头插入
+}
+
+template <class T>
+void LinkedList<T>::insertRear(const T& item)   // 在表尾插入结点
+{
+    Node<T> *nNode;
+    prevPtr = rear;
+    nNode = newNode(item);  // 创建新结点
+    if (rear == NULL)   // 如果表空则插入在表头
+        front = rear = nNode;
+    else
+    {
+        rear->insertAfter(nNode);
+        rear = nNode;
+    }
+    currPtr = rear;
+    position = size;
+    size++;
+}
+
+template <class T>
+void LinkedList<T>::insertAt(const T& item) // 将item插入在链表当前位置
+{
+    Node<T> *nNode;
+    if (prevPtr == NULL)    // 插入在链表头，包括将结点插入到空表中
+    {
+        nNode = newNode(item, front);
+        front = nNode;
+    }
+    else    // 插入到链表之中. 将结点置于prevPtr之后
+    {
+        nNode = newNode(item);
+        prevPtr->insertAfter(nNode);
+    }
+    if (prevPtr == rear)    //正在向空表中插入，或者是插入到非空表的表尾
+    {
+        rear = nNode;   //更新rear 
+        position = size;    //更新position 
+    }
+    currPtr = nNode;    //更新currPtr
+    size++; //使size增值
+}
+
+template <class T>
+void LinkedList<T>::insertAfter(const T& item)  // 将item 插入到链表当前位置之后
+{
+    Node<T> *p;
+    p = newNode(item);
+    if (front == NULL)   // 向空表中插入
+    {
+        front = currPtr = rear = p;
+        position = 0;
+    }
+    else    // 插入到最后一个结点之后
+    {
+        if (currPtr == NULL)
+            currPtr = prevPtr;
+        currPtr->insertAfter(p);
+        if (currPtr == rear)
+        {
+            rear = p;
+            position = size;
+        }
+        else
+            position++;
+        prevPtr = currPtr;
+        currPtr = p;
+    }
+    size++;              // 使链表长度增值
+}
+
+template <class T>
+T LinkedList<T>::deleteFront()  // 删除表头结点
+{
+    T item;
+    reset();
+    if (front == NULL)
+    {
+        cerr << "Invalid deletion!" << endl;
+        exit(1);
+    }
+    item = currPtr->data;
+    deleteCurrent();
+    return item;
+}
+
+template <class T>
+void LinkedList<T>::deleteCurrent() // 删除链表当前位置的结点
+{
+    Node<T> *p;
+    if (currPtr == NULL)    // 如果表空或达到表尾则出错
+    {
+        cerr << "Invalid deletion!" << endl;
+        exit(1);
+    }
+    if (prevPtr == NULL)    // 删除将发生在表头或链表之中
+    {
+        p = front;  // 保存头结点地址
+        front = front->nextNode();  //将其从链表中分离
+    }
+    else    //分离prevPtr之后的一个内部结点，保存其地址
+        p = prevPtr->deleteAfter();
+
+    if (p == rear)  // 如果表尾结点被删除
+    {
+        rear = prevPtr; //新的表尾是prevPtr 
+        position--; //position自减
+    }
+    currPtr = p->nextNode();    // 使currPtr越过被删除的结点
+    freeNode(p);    // 释放结点，并
+    size--; //使链表长度自减
+}
+
+template <class T>
+T& LinkedList<T>::data()    //返回一个当前结点数值的引用
+{
+    if (size == 0 || currPtr == NULL)   // 如果链表为空或已经完成遍历则出错
+    {
+        cerr << "Data: invalid reference!" << endl;
+        exit(1);
+    }
+    return currPtr->data;
+}
+
+template <class T>
+void LinkedList<T>::clear() //清空链表
+{
+    Node<T> *currPosition, *nextPosition;
+    currPosition = front;
+    while (currPosition != NULL)
+    {
+        nextPosition = currPosition->nextNode(); //取得下一结点的地址
+        freeNode(currPosition); //删除当前结点
+        currPosition = nextPosition;    //当前指针移动到下一结点
+    }
+    front = rear = NULL;
+    prevPtr = currPtr = NULL;
+    size = 0;
+    position = -1;
+}
+#endif  //LINKEDLIST_H
+```
+
+#### stack
+
+```c++
+//Stack.h
+#ifndef STACK_H
+#define STACK_H
+#include <cassert> 
+template <class T, int SIZE = 50>
+class Stack {
+private:
+    T list[SIZE];
+    int top;
+public:
+    Stack();
+    void push(const T &item);
+    T pop();
+    void clear();
+    const T &peek() const;
+    bool isEmpty() const;
+    bool isFull() const;
+};
+
+//模板的实现
+template <class T, int SIZE>
+Stack<T, SIZE>::Stack() : top(-1) { }   
+template <class T, int SIZE>
+void Stack<T, SIZE>::push(const T &item) {  
+    assert(!isFull());  
+    list[++top] = item; //先自增再加一
+}
+template <class T, int SIZE>
+T Stack<T, SIZE>::pop() {   
+    assert(!isEmpty()); 
+    return list[top--]; //先放出再自减一
+}
+template <class T, int SIZE>
+const T &Stack<T, SIZE>::peek() const {
+    assert(!isEmpty()); 
+    return list[top];   //返回栈顶元素
+}
+template <class T, int SIZE>
+bool Stack<T, SIZE>::isEmpty() const {
+    return top == -1;
+}
+template <class T, int SIZE>
+bool Stack<T, SIZE>::isFull() const {   
+    return top == SIZE - 1;
+}
+
+template <class T, int SIZE>
+void Stack<T, SIZE>::clear() {  
+    top = -1;
+}
+
+#endif  //STACK_H
+
+```
+
+```c++
+//Calculator.h
+#ifndef CALCULATOR_H
+#define CALCULATOR_H
+#include "Stack.h"  // 包含栈类模板定义文件
+
+class Calculator {  //计算器类
+private:
+    Stack<double> s;    // 操作数栈
+    void enter(double num); //将操作数num压入栈
+    //连续将两个操作数弹出栈，放在opnd1和opnd2中
+    bool getTwoOperands(double &opnd1, double &opnd2);
+    void compute(char op);  //执行由操作符op指定的运算
+public:
+    void run();     //运行计算器程序
+    void clear();   //清空操作数栈
+};
+#endif //CALCULATOR_H
+
+//Calculator.cpp
+#include "Calculator.h"
+#include <iostream>
+#include <sstream>
+#include <cmath>
+using namespace std;
+
+//工具函数，用于将字符串转换为实数
+inline double stringToDouble(const string &str) {
+    istringstream stream(str);  //字符串输入流
+    double result;
+    stream >> result;
+    return result;
+}
+
+void Calculator::enter(double num) {    //将操作数num压入栈
+    s.push(num);
+}
+
+bool Calculator::getTwoOperands(double &opnd1, double &opnd2) {
+    if (s.isEmpty()) {  //检查栈是否空
+        cerr << "Missing operand!" << endl;
+        return false;
+    }
+    opnd1 = s.pop();    //将右操作数弹出栈
+    if (s.isEmpty()) {  //检查栈是否空
+        cerr << "Missing operand!" << endl;
+        return false;
+    }
+    opnd2 = s.pop();    //将左操作数弹出栈
+    return true;
+}
+
+void Calculator::compute(char op) { //执行运算
+    double operand1, operand2;
+    bool result = getTwoOperands(operand1, operand2);   
+    if (result) {   //如果成功，执行运算并将运算结果压入栈
+        switch(op) {
+        case '+': s.push(operand2 + operand1); break;
+        case '-': s.push(operand2 - operand1); break;
+        case '*': s.push(operand2 * operand1); break;
+        case '/': if (operand1 == 0) {    //检查除数是否为0
+                 cerr << "Divided by 0!" << endl;
+                 s.clear();    //除数为0时清空栈
+                      } else
+                 s.push(operand2 / operand1);
+                      break;
+        case '^': s.push(pow(operand2, operand1)); break;
+        default:  cerr << "Unrecognized operator!" << endl;
+                      break;
+        }
+        cout << "= " << s.peek() << " ";    //输出本次运算结果 
+    } else
+        s.clear();  //操作数不够，清空栈
+}
+
+void Calculator::run() { //读入并处理后缀表达式
+    string str;
+    while (cin >> str, str != "q") {
+        switch(str[0]) {
+        case 'c': s.clear(); break;
+        case '-': //遇'-'需判断是减号还是负号
+            if (str.size() > 1)
+                enter(stringToDouble(str)); 
+            else
+                compute(str[0]);    
+            break;
+        case '+':   //遇到其它操作符时
+        case '*':
+        case '/':
+        case '^':
+            compute(str[0]);   break;
+        default: //若读入的是操作数，转换为整型后压入栈
+            enter(stringToDouble(str)); break;
+        }
+    }
+}
+void Calculator::clear() {  //清空操作数栈
+    s.clear(); 
+}
+
+//9_9.cpp
+#include "Calculator.h"
+
+int main() {
+    Calculator c;
+    c.run();
+    return 0;
+}
+```
 
 ###### 手动调用构造函数
 ```c++

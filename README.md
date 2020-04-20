@@ -24,6 +24,207 @@
 - 最后一个先后才能对取消请求作出响应
 
 ---
+# 0. 关于学习资料
+
+对于大部分知识，最好的学习资料还是书籍，因为书籍经过了长期的检验，质量有保证。而且书籍的知识体系更加完善，这是网络上的博客文章所不具备的，所以看书比看博客文章有用。
+
+我的博客 [CS-Notes](https://github.com/CyC2018/CS-Notes) 知识体系也很完善，而且内容简洁易懂。你可以先看这个博客入门学习，然后某些内容再看书进行补充学习。
+
+纸质书对眼睛好，排版好。但是不方便携带和查阅，不方便做笔记而且价格也更高。电子书优缺点基本和纸质书相反。建议某些很经典的书籍还是买纸质书，毕竟要经常翻。而那些就打算看几次，或者当做参考的书，可以买电子书，方便很多。如果有非常高质量的电子书，也比较推荐电子书。
+
+在电商上买纸质书经常有满 200-100 的活动，会便宜很多，比如 618、双 11。电商上也有专门卖电子书的渠道，豆瓣和微信读书上也有很多电子书。图灵社区的书可以在它们官网上去购买，有文字版 PDF 或者 MOBI。其它电子书资料可以直接使用 Google 搜 xxx pdf、xxx mobi 进行查找。
+
+在二手交易平台买书也不错，但是不推荐买盗版书，因为没有比电商做活动的时候便宜多少，而且纸张质量很差。
+
+✏️
+
+# 1. 数据结构与算法
+
+**1.1 《算法》**
+
+[豆瓣](https://book.douban.com/subject/19952400/) 9.4 分，873 人评分。
+
+![img](https://images.xiaozhuanlan.com/photo/2019/f4c33d99895ca1b832abd9d83d4cf0c8.png)
+
+非常适合作为数据结构与算法的入门书籍，比算法导论容易理解得多。使用 Java 实现，但不会涉及太多的 Java 高级语法，因此也适合其它语言使用者使用。
+
+Coursera 上有配套视频课程：[Algorithms](https://www.coursera.org/learn/algorithms-part1)，如果课程还没到该课程的注册时间，还是可以点进去观看视频，只是没有作业和证书。
+
+**1.2《数据结构》**
+
+[豆瓣](https://book.douban.com/subject/25859528/) 9.4 分，139 人评分。
+
+<img src="https://images.xiaozhuanlan.com/photo/2019/adf8f4a2c5ea2a484e16bc7ba56d792f.png" alt="img" style="zoom: 33%;" />
+
+使用 C++ 实现，可以结合配套视频学习：[清华大学 数据结构](https://www.xuetangx.com/courses/course-v1:TsinghuaX+30240184+sp/about)。
+
+**1.3 《剑指 Offer》**
+
+[豆瓣](https://book.douban.com/subject/6966465/) 8.3 分，572 人评分。
+
+![img](https://images.xiaozhuanlan.com/photo/2019/7c075bc8c1e22ba985e2abdb415ee04c.png)
+
+基本涵盖了高频代码面试题，在面试之前很有必要把这本书里面的题目都刷完。
+
+原书使用 C++ 实现，官方提供了第二版的源代码：[CodingInterviewChinese2](https://github.com/zhedahht/CodingInterviewChinese2)。
+
+该书的刷题网站推荐 [牛客网](https://www.nowcoder.com/ta/coding-interviews)。
+
+**1.4 Leetcode**
+
+[Leetcode](https://leetcode.com/problemset/algorithms/)
+
+剑指 Offer 上的题目基本能在 Leetcode 上找到，而且 Leetcode 更全面，如果时间充足的话建议先刷 Leetcode 再刷剑指 Offer。刷 200 题就足够应对大多数公司的代码面试题。
+
+最开始可以按 Acceptance 逆序来刷，不会的题目可以先看看 Discuss 上的高票答案，先学习别人是怎么做的。建议使用 Leetcode 英文版，因为英文版 Discuss 上的优质答案比较多。
+
+**1.5《程序员代码面试指南》**
+
+[豆瓣](https://book.douban.com/subject/26638586/) 8.9 分，82 人评分。
+
+![img](https://images.xiaozhuanlan.com/photo/2019/8c06ac6ea6f33274511a719ca812a3df.png)
+
+适合当做 Leetcode 的辅助书籍，对一些题目讲解的不错。除了算法题之外，还有一些海量数据分析的题目很值得看一下。
+
+**1.6 玩转算法面试 从真题到思维全面提升算法思维**
+
+[慕课网](https://coding.imooc.com/class/82.html)
+
+在线视频课程，主要讲解 Leetcode 上面的题目，画图和讲解都很用心。
+
+**1.7 《挑战程序设计竞赛》**
+
+[豆瓣](https://book.douban.com/subject/24749842/) 9.0 分，203 人评分。
+
+![img](https://images.xiaozhuanlan.com/photo/2019/d5142b66e411ade71e73ef689e019cb3.png)
+
+大厂面试可能会出现一些简单 ACM 题目，所以这本书也值得看一部分内容，比如线段树、网络流等。
+
+☁️
+
+# 2. 计算机网络
+
+**2.1 《计算机网络 自顶向下方法》**
+
+[豆瓣](https://book.douban.com/subject/26176870/) 8.9 分，297 人评分。
+
+![img](https://images.xiaozhuanlan.com/photo/2019/1a1c5b09936bbd86b31719eefeca609d.png)
+
+适合当做入门书籍，重点阅读前四章内容。
+
+**2.2《计算机网络》**
+
+[豆瓣](https://book.douban.com/subject/24740558/) 8.0 分，142 人评分。
+
+![img](https://images.xiaozhuanlan.com/photo/2019/7226f3d4d7dedf2e2a8edb43ceeab14f.png)
+
+大部分学校的教材，可以当做上一本书的辅助书籍，结合着看。
+
+**2.3 《TCP/IP 详解 卷 1：协议》**
+
+[豆瓣](https://book.douban.com/subject/1088054/) 9.2 分，1963 人评分。
+
+![img](https://images.xiaozhuanlan.com/photo/2019/21e17cce17c942ca4f3513622756e5a0.png)
+
+TCP/IP 是网络中最重要的一部分，对于某些面试高频知识点，建议阅读这本书的相应章节进行深入学习。
+
+**2.4 《UNIX 网络编程 卷 1：套接字联网 API》**
+
+[豆瓣](https://book.douban.com/subject/1500149/) 9.5 分，915 人评分。
+
+<img src="https://images.xiaozhuanlan.com/photo/2019/7101bdee760f5858066ae67f1a93c920.png" alt="img" style="zoom:33%;" />
+
+UNIX 网络编程（UNP）和 UNIX 环境高级编程（APUE）被称为腾讯的敲门砖，C++ 岗位的同学都应该学习一下。Java 或者其它岗位的同学倒是没那么高的要求，但是某些内容还是需要学习一下。这两本书是大部头，从头看到尾不太现实，比较适合当做工具书，在你碰到问题的时候再去查找书中的内容。
+
+**2.5 《Linux 多线程服务端编程》**
+
+[豆瓣](https://book.douban.com/subject/20471211/) 8.8 分，394 人评分。
+
+![img](https://images.xiaozhuanlan.com/photo/2019/79bea98a07fa506c13452d80a8ca72a2.png)
+
+比 UNP 更贴近实践，如果想做 Web Server 等项目的话，建议先看这本书。
+
+**2.6 《图解 HTTP》**
+
+[豆瓣](https://book.douban.com/subject/25863515/) 8.1 分，1669 人评分。
+
+<img src="https://images.xiaozhuanlan.com/photo/2019/f06c3ba24be562a48b0df957259f11f1.png" alt="img" style="zoom:33%;" />
+
+HTTP 也是网络中非常重要的部分，这本书使用大量图示进行讲解，所以非常通俗易懂。
+
+💻
+
+# 3. 操作系统
+
+**3.1 《现代操作系统》**
+
+[豆瓣](https://book.douban.com/subject/3852290/) 8.9 分，656 人评分。
+
+<img src="https://images.xiaozhuanlan.com/photo/2019/86fc87b2424a538deaebb83f7881b948.png" alt="img" style="zoom:50%;" />
+
+建议重点阅读：进程与线程、死锁、存储管理章节。
+
+**3.2《深入理解计算机系统》**
+
+[豆瓣](https://book.douban.com/subject/5333562/) 9.7 分，2211 人评分。
+
+<img src="https://images.xiaozhuanlan.com/photo/2019/edf0c91048ba38943e1514d2f23be0a9.png" alt="img" style="zoom:33%;" />
+
+可以当做计算机导论来看，涉及方方面面的内容。豆瓣评分数 9.7 分的书没几本，真的算是神书了。第三四章可以先不看，因为面试和工作中涉及到的体系结构内容比较少。
+
+**3.3 《UNIX 环境高级编程》**
+
+[豆瓣](https://book.douban.com/subject/1788421/) 9.4 分，2187 人评分。
+
+<img src="https://images.xiaozhuanlan.com/photo/2019/6e7eadc27742cb7b758db701829ad89a.png" alt="img" style="zoom:33%;" />
+
+APUE，和 UNP 类似，都是 C++ 岗位必备书籍。
+
+**3.4 《Unix/Linux 编程实践教程》**
+
+[豆瓣](https://book.douban.com/subject/1219329/) 9.2 分，369 人评分。
+
+![img](https://images.xiaozhuanlan.com/photo/2019/2291eb41daa8a300726e0ece2ff436bb.png)
+
+非常适合当作 Unix/Linux 系统编程的入门书籍，比 APUE 更容易理解。
+
+**3.5 《鸟哥的 Linux 私房菜》**
+
+[豆瓣](https://book.douban.com/subject/4889838/) 9.1 分，2604 人评分。
+
+![img](https://images.xiaozhuanlan.com/photo/2019/f6c2d15bf15d94377d393559dfb6f202.png)
+
+适合当做 Linux 的入门书籍，通俗易懂，不过太过通俗有点啰嗦了。
+
+**3.6《The Linux Command Line》**
+
+[豆瓣](https://book.douban.com/subject/6806862/) 9.3 分，290 人评分。
+
+![img](https://images.xiaozhuanlan.com/photo/2019/7ccf0ce59f3e9e4cae56f80c871482b1.png)
+
+比鸟哥的书简洁很多，有 [中文版](http://billie66.github.io/TLCL/book/) 可以阅读。
+
+💾
+
+# 4. 数据库
+
+**4.1 《MySQL 必知必会》**
+
+[豆瓣](https://book.douban.com/subject/3354490/) 8.4 分，904 人评分。
+
+![img](https://images.xiaozhuanlan.com/photo/2019/a06edc0e9232a9a52d7e52f67efad804.png)
+
+学习数据库第一步是学习 SQL，这本书很适合当做 SQL 的入门书籍，实践性很强。
+
+
+
+
+
+
+
+
+
+---
 
 ##  C++ 学习
 
@@ -1547,7 +1748,19 @@ shedule() 由几个内核控制路径调用, 可以采取**直接调用**或**�
 
   必须先对读写锁进行初始化, 最后必须用destory函数清理初始化时获得的资源.
 
-  `pthread_rwlock_t rwlock = PTHREAD_RWLOCK_INITIALIZER;` `int` `pthread_rwlock_init(pthread_rwlock_t *restrict rwlock,``            ``const` `pthread_rwlockattr_t *restrict attr);` `int` `pthread_rwlock_destroy(pthread_rwlock_t *rwlock);` `int` `pthread_rwlock_rdlock(pthread_rwlock_t *rwlock);` `int` `pthread_rwlock_wrlock(pthread_rwlock_t *rwlock);` `int` `pthread_rwlock_unlock(pthread_rwlock_t *rwlock);` `int` `pthread_rwlock_tryrdlock(pthread_rwlock_t *rwlock);` `int` `pthread_rwlock_trywrlock(pthread_rwlock_t *rwlock);` `int` `pthread_rwlock_timedrdlock(pthread_rwlock_t *restrict rwlock,``              ``const` `struct timespec *restrict abstime);` `int` `pthread_rwlock_timedwrlock(pthread_rwlock_t *restrict rwlock,``              ``const` `struct timespec *restrict abstime); ``// abstime是绝对时间.`
+  `pthread_rwlock_t rwlock = PTHREAD_RWLOCK_INITIALIZER;` 
+  `int` `pthread_rwlock_init(pthread_rwlock_t *restrict rwlock,``    
+  ``const` `pthread_rwlockattr_t *restrict attr);`
+  `int` `pthread_rwlock_destroy(pthread_rwlock_t *rwlock);` 
+  `int` `pthread_rwlock_rdlock(pthread_rwlock_t *rwlock);`
+  `int` `pthread_rwlock_wrlock(pthread_rwlock_t *rwlock);` 
+  `int` `pthread_rwlock_unlock(pthread_rwlock_t *rwlock);`
+  `int` `pthread_rwlock_tryrdlock(pthread_rwlock_t *rwlock);`
+  `int` `pthread_rwlock_trywrlock(pthread_rwlock_t *rwlock);`
+  `int` `pthread_rwlock_timedrdlock(pthread_rwlock_t *restrict rwlock,``  
+  ``const` `struct timespec *restrict abstime);`
+  `int``pthread_rwlock_timedwrlock(pthread_rwlock_t *restrict rwlock,``      
+  ``const` `struct timespec *restrict abstime); ``// abstime是绝对时间.`
 
 - 自旋锁
 
@@ -2409,197 +2622,7 @@ exit(0); /*终止*/
 
 
 
-# 0. 关于学习资料
 
-对于大部分知识，最好的学习资料还是书籍，因为书籍经过了长期的检验，质量有保证。而且书籍的知识体系更加完善，这是网络上的博客文章所不具备的，所以看书比看博客文章有用。
-
-我的博客 [CS-Notes](https://github.com/CyC2018/CS-Notes) 知识体系也很完善，而且内容简洁易懂。你可以先看这个博客入门学习，然后某些内容再看书进行补充学习。
-
-纸质书对眼睛好，排版好。但是不方便携带和查阅，不方便做笔记而且价格也更高。电子书优缺点基本和纸质书相反。建议某些很经典的书籍还是买纸质书，毕竟要经常翻。而那些就打算看几次，或者当做参考的书，可以买电子书，方便很多。如果有非常高质量的电子书，也比较推荐电子书。
-
-在电商上买纸质书经常有满 200-100 的活动，会便宜很多，比如 618、双 11。电商上也有专门卖电子书的渠道，豆瓣和微信读书上也有很多电子书。图灵社区的书可以在它们官网上去购买，有文字版 PDF 或者 MOBI。其它电子书资料可以直接使用 Google 搜 xxx pdf、xxx mobi 进行查找。
-
-在二手交易平台买书也不错，但是不推荐买盗版书，因为没有比电商做活动的时候便宜多少，而且纸张质量很差。
-
-✏️
-
-# 1. 数据结构与算法
-
-**1.1 《算法》**
-
-[豆瓣](https://book.douban.com/subject/19952400/) 9.4 分，873 人评分。
-
-![img](https://images.xiaozhuanlan.com/photo/2019/f4c33d99895ca1b832abd9d83d4cf0c8.png)
-
-非常适合作为数据结构与算法的入门书籍，比算法导论容易理解得多。使用 Java 实现，但不会涉及太多的 Java 高级语法，因此也适合其它语言使用者使用。
-
-Coursera 上有配套视频课程：[Algorithms](https://www.coursera.org/learn/algorithms-part1)，如果课程还没到该课程的注册时间，还是可以点进去观看视频，只是没有作业和证书。
-
-**1.2《数据结构》**
-
-[豆瓣](https://book.douban.com/subject/25859528/) 9.4 分，139 人评分。
-
-<img src="https://images.xiaozhuanlan.com/photo/2019/adf8f4a2c5ea2a484e16bc7ba56d792f.png" alt="img" style="zoom: 33%;" />
-
-使用 C++ 实现，可以结合配套视频学习：[清华大学 数据结构](https://www.xuetangx.com/courses/course-v1:TsinghuaX+30240184+sp/about)。
-
-**1.3 《剑指 Offer》**
-
-[豆瓣](https://book.douban.com/subject/6966465/) 8.3 分，572 人评分。
-
-![img](https://images.xiaozhuanlan.com/photo/2019/7c075bc8c1e22ba985e2abdb415ee04c.png)
-
-基本涵盖了高频代码面试题，在面试之前很有必要把这本书里面的题目都刷完。
-
-原书使用 C++ 实现，官方提供了第二版的源代码：[CodingInterviewChinese2](https://github.com/zhedahht/CodingInterviewChinese2)。
-
-该书的刷题网站推荐 [牛客网](https://www.nowcoder.com/ta/coding-interviews)。
-
-**1.4 Leetcode**
-
-[Leetcode](https://leetcode.com/problemset/algorithms/)
-
-剑指 Offer 上的题目基本能在 Leetcode 上找到，而且 Leetcode 更全面，如果时间充足的话建议先刷 Leetcode 再刷剑指 Offer。刷 200 题就足够应对大多数公司的代码面试题。
-
-最开始可以按 Acceptance 逆序来刷，不会的题目可以先看看 Discuss 上的高票答案，先学习别人是怎么做的。建议使用 Leetcode 英文版，因为英文版 Discuss 上的优质答案比较多。
-
-**1.5《程序员代码面试指南》**
-
-[豆瓣](https://book.douban.com/subject/26638586/) 8.9 分，82 人评分。
-
-![img](https://images.xiaozhuanlan.com/photo/2019/8c06ac6ea6f33274511a719ca812a3df.png)
-
-适合当做 Leetcode 的辅助书籍，对一些题目讲解的不错。除了算法题之外，还有一些海量数据分析的题目很值得看一下。
-
-**1.6 玩转算法面试 从真题到思维全面提升算法思维**
-
-[慕课网](https://coding.imooc.com/class/82.html)
-
-在线视频课程，主要讲解 Leetcode 上面的题目，画图和讲解都很用心。
-
-**1.7 《挑战程序设计竞赛》**
-
-[豆瓣](https://book.douban.com/subject/24749842/) 9.0 分，203 人评分。
-
-![img](https://images.xiaozhuanlan.com/photo/2019/d5142b66e411ade71e73ef689e019cb3.png)
-
-大厂面试可能会出现一些简单 ACM 题目，所以这本书也值得看一部分内容，比如线段树、网络流等。
-
-☁️
-
-# 2. 计算机网络
-
-**2.1 《计算机网络 自顶向下方法》**
-
-[豆瓣](https://book.douban.com/subject/26176870/) 8.9 分，297 人评分。
-
-![img](https://images.xiaozhuanlan.com/photo/2019/1a1c5b09936bbd86b31719eefeca609d.png)
-
-适合当做入门书籍，重点阅读前四章内容。
-
-**2.2《计算机网络》**
-
-[豆瓣](https://book.douban.com/subject/24740558/) 8.0 分，142 人评分。
-
-![img](https://images.xiaozhuanlan.com/photo/2019/7226f3d4d7dedf2e2a8edb43ceeab14f.png)
-
-大部分学校的教材，可以当做上一本书的辅助书籍，结合着看。
-
-**2.3 《TCP/IP 详解 卷 1：协议》**
-
-[豆瓣](https://book.douban.com/subject/1088054/) 9.2 分，1963 人评分。
-
-![img](https://images.xiaozhuanlan.com/photo/2019/21e17cce17c942ca4f3513622756e5a0.png)
-
-TCP/IP 是网络中最重要的一部分，对于某些面试高频知识点，建议阅读这本书的相应章节进行深入学习。
-
-**2.4 《UNIX 网络编程 卷 1：套接字联网 API》**
-
-[豆瓣](https://book.douban.com/subject/1500149/) 9.5 分，915 人评分。
-
-<img src="https://images.xiaozhuanlan.com/photo/2019/7101bdee760f5858066ae67f1a93c920.png" alt="img" style="zoom:33%;" />
-
-UNIX 网络编程（UNP）和 UNIX 环境高级编程（APUE）被称为腾讯的敲门砖，C++ 岗位的同学都应该学习一下。Java 或者其它岗位的同学倒是没那么高的要求，但是某些内容还是需要学习一下。这两本书是大部头，从头看到尾不太现实，比较适合当做工具书，在你碰到问题的时候再去查找书中的内容。
-
-**2.5 《Linux 多线程服务端编程》**
-
-[豆瓣](https://book.douban.com/subject/20471211/) 8.8 分，394 人评分。
-
-![img](https://images.xiaozhuanlan.com/photo/2019/79bea98a07fa506c13452d80a8ca72a2.png)
-
-比 UNP 更贴近实践，如果想做 Web Server 等项目的话，建议先看这本书。
-
-**2.6 《图解 HTTP》**
-
-[豆瓣](https://book.douban.com/subject/25863515/) 8.1 分，1669 人评分。
-
-<img src="https://images.xiaozhuanlan.com/photo/2019/f06c3ba24be562a48b0df957259f11f1.png" alt="img" style="zoom:33%;" />
-
-HTTP 也是网络中非常重要的部分，这本书使用大量图示进行讲解，所以非常通俗易懂。
-
-💻
-
-# 3. 操作系统
-
-**3.1 《现代操作系统》**
-
-[豆瓣](https://book.douban.com/subject/3852290/) 8.9 分，656 人评分。
-
-<img src="https://images.xiaozhuanlan.com/photo/2019/86fc87b2424a538deaebb83f7881b948.png" alt="img" style="zoom:50%;" />
-
-建议重点阅读：进程与线程、死锁、存储管理章节。
-
-**3.2《深入理解计算机系统》**
-
-[豆瓣](https://book.douban.com/subject/5333562/) 9.7 分，2211 人评分。
-
-<img src="https://images.xiaozhuanlan.com/photo/2019/edf0c91048ba38943e1514d2f23be0a9.png" alt="img" style="zoom:33%;" />
-
-可以当做计算机导论来看，涉及方方面面的内容。豆瓣评分数 9.7 分的书没几本，真的算是神书了。第三四章可以先不看，因为面试和工作中涉及到的体系结构内容比较少。
-
-**3.3 《UNIX 环境高级编程》**
-
-[豆瓣](https://book.douban.com/subject/1788421/) 9.4 分，2187 人评分。
-
-<img src="https://images.xiaozhuanlan.com/photo/2019/6e7eadc27742cb7b758db701829ad89a.png" alt="img" style="zoom:33%;" />
-
-APUE，和 UNP 类似，都是 C++ 岗位必备书籍。
-
-**3.4 《Unix/Linux 编程实践教程》**
-
-[豆瓣](https://book.douban.com/subject/1219329/) 9.2 分，369 人评分。
-
-![img](https://images.xiaozhuanlan.com/photo/2019/2291eb41daa8a300726e0ece2ff436bb.png)
-
-非常适合当作 Unix/Linux 系统编程的入门书籍，比 APUE 更容易理解。
-
-**3.5 《鸟哥的 Linux 私房菜》**
-
-[豆瓣](https://book.douban.com/subject/4889838/) 9.1 分，2604 人评分。
-
-![img](https://images.xiaozhuanlan.com/photo/2019/f6c2d15bf15d94377d393559dfb6f202.png)
-
-适合当做 Linux 的入门书籍，通俗易懂，不过太过通俗有点啰嗦了。
-
-**3.6《The Linux Command Line》**
-
-[豆瓣](https://book.douban.com/subject/6806862/) 9.3 分，290 人评分。
-
-![img](https://images.xiaozhuanlan.com/photo/2019/7ccf0ce59f3e9e4cae56f80c871482b1.png)
-
-比鸟哥的书简洁很多，有 [中文版](http://billie66.github.io/TLCL/book/) 可以阅读。
-
-💾
-
-# 4. 数据库
-
-**4.1 《MySQL 必知必会》**
-
-[豆瓣](https://book.douban.com/subject/3354490/) 8.4 分，904 人评分。
-
-![img](https://images.xiaozhuanlan.com/photo/2019/a06edc0e9232a9a52d7e52f67efad804.png)
-
-学习数据库第一步是学习 SQL，这本书很适合当做 SQL 的入门书籍，实践性很强。
 
 #### 函数重载
 * 参数个数不同

@@ -3,6 +3,7 @@
 - [后端试题总结](https://github.com/HamRadioDXer/language-leaning/blob/master/%E5%90%8E%E7%AB%AF.md)
 - [《UNIX系统高级编程》](https://github.com/HamRadioDXer/language-leaning/blob/master/apue.md)
 - [腾讯面](https://github.com/HamRadioDXer/language-leaning/blob/master/%E8%85%BE%E8%AE%AF%E9%9D%A2.md)
+- [牛客网剑指offer刷题](https://github.com/HamRadioDXer/language-leaning/blob/master/%E5%89%91%E6%8C%87offer%E7%89%9B%E5%AE%A2%E7%BD%91%E9%A1%BA%E5%BA%8F%E6%B1%87%E6%80%BB.pdf)
 
 
 
